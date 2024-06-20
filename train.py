@@ -16,11 +16,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # plt.scatter(X[:,2], X[:,3], c=y, cmap=cmap, edgecolor='k', s=20)
 # plt.show()
 
+print(len(X_train))
+
 classifier = kNN(k=5)
 classifier.fit(X_train, y_train)
-preds = classifier.predict(X_test)
+# preds = classifier.predict(X_test)
 
-print(preds[0][1][1])
 
 # for id, pred in enumerate(preds):
 #     len(pred)
