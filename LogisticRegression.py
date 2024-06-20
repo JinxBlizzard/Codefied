@@ -4,7 +4,7 @@ def sigmoid(x):
     x_new = np.array(x, dtype=np.float64)
     return 1/(1 + np.exp(-x))
 
-def log_loss(y, preds):
+def log_loss(y, preds): # check for issues
     return np.dot(y, np.log(preds)) + np.dot((1 - y), np.log(1 - preds)) 
     
 
