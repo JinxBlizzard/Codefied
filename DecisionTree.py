@@ -32,9 +32,9 @@ class DecisionTree():
             leaf_value = self._most_common_label(y)
             return Node(value=leaf_value)
         
-        feat_idx = np.random.choice(n_feats, self.n_features, replace=False)
+        feat_idxs = np.random.choice(n_feats, self.n_features, replace=False)
         
-        best_feature, best_thresh = self._best_split(X, y, feat_idx)
+        best_feature, best_thresh = self._best_split(X, y, feat_idxs)
         
         left_idxs, right_idxs = self._split(X[:, best_feature], best_thresh)
         left = self._grow_tree(X[left_idxs, :], y[left_idxs], depth+1)
@@ -55,7 +55,7 @@ class DecisionTree():
             thresholds = np.unique(X_column)
             
             for thr in thresholds:
-                gain = self._information_gain(y, X_column, split_threshold)
+                gain = self._information_gain(y, X_column, thr)
                 
                 if gain > best_gain:
                     best_gain = gain
@@ -92,12 +92,12 @@ class DecisionTree():
         return -np.sum(prb * np.log(prb) for prb in prbs if prb>0)
     
     def predict(self, X):
-        return np.array([self._traverse_tree(x) for x in X])
+        return np.array([self._traverse(x, self.root) for x in X])
     
     def _traverse(self, x, node):
-        if node.is_left_node():
+        if node.is_leaf_node():
             return node.value
         
         if x[node.feature] <= node.threshold:
-            return self._traverse_tree(x, node.left)
-        return self._traverse_tree(x, node.right)
+            return self._traverse(x, node.left)
+        return self._traverse(x, node.right)
