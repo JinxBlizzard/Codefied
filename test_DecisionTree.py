@@ -8,7 +8,7 @@ X, y = data.data, data.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=7)
 
-classifier = DecisionTree(max_depth=12)
+classifier = DecisionTree(max_depth=14)
 classifier.fit(X_train, y_train)
 predictions = classifier.predict(X_test)
 
