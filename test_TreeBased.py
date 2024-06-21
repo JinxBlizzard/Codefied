@@ -2,6 +2,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import numpy as np
 from DecisionTree import DecisionTree
+from RandomForest import RandomForest
 
 data = datasets.load_breast_cancer()
 X, y = data.data, data.target
@@ -13,3 +14,9 @@ classifier.fit(X_train, y_train)
 predictions = classifier.predict(X_test)
 
 print(np.sum(y_test == predictions)/len(y_test))
+
+classifier2 = RandomForest(n_trees=20)
+classifier2.fit(X_train, y_train)
+predictions2 = classifier2.predict(X_test)
+
+print(np.sum(y_test == predictions2)/len(y_test))
