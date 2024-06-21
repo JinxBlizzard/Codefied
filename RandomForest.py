@@ -7,7 +7,7 @@ class RandomForest():
         self.n_trees = n_trees
         self.max_depth = max_depth
         self.min_samples_splits = min_samples_split
-        self.n_features = n_trees
+        self.n_features = n_features
         self.trees = []
         
     def fit(self, X, y):
